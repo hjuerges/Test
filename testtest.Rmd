@@ -1,35 +1,52 @@
 ---
-title: "Test the test"
+title: "How to publish slides with Github"
 author: "Hendrik Jürges"
 date: "19 11 2021"
 output: slidy_presentation
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Create doc
 
-This is an R Markdown presentation. Here is a change. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+1. Create directory on harddisk
+2. Create R project
+```{r eval=FALSE}
+usethis::create_project("filepath/for/your/presentation/repo-name")
+```
+3. Create presentation or other html-file
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+## Connect project with Github
 
-## Slide with Bullets
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
-## Slide with R Output
-
-```{r cars, echo = TRUE}
-summary(cars)
+4. Initialize version control with git. Say yes to both prompts
+```{r eval=FALSE}
+usethis::use_git()
+```
+5. Connect your local project with a GitHub repo (possibly with option `private = TRUE`)
+```{r eval=FALSE}
+usethis::use_github()
 ```
 
-## Slide with Plot
+## Make and commit changes
 
-```{r pressure}
-plot(pressure)
+The next steps happen in the terminal!
+
+```{r eval=FALSE}
+# Step 1: Stage all modified files
+git add .
+# Step 2: Describe the changes you made to your files
+git commit -m "<A brief but descriptive commit message>"
+# Step 3: Push the changes to your GitHub repository
+git push
 ```
 
+## Deploy slides
+
+```{r eval=FALSE}
+usethis::use_github_pages(branch = "master")
+```
+
+- Only need to follow this step once to deploy your slides to the web
+- As long as you remember to push to your repo any changes that you make to your slides (Rmd and HTML), GitHub Pages will know how to render them
